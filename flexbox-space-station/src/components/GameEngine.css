@@ -1,0 +1,80 @@
+.game-root {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.game-main {
+  display: flex;
+  flex: 1;
+  margin-top: var(--hud-height);
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Left panel — Code Editor (40%) */
+.game-main > :first-child {
+  width: 40%;
+  flex-shrink: 0;
+  border-right: none;
+}
+
+/* Divider */
+.game-divider {
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--cyan-border) 20%,
+    var(--cyan-border) 80%,
+    transparent
+  );
+  flex-shrink: 0;
+  box-shadow: 0 0 8px var(--cyan-glow);
+}
+
+/* Right panel — Station (60%) */
+.game-main > :last-child {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ====== Mobile: Stacked layout ====== */
+@media (max-width: 768px) {
+  .game-main {
+    flex-direction: column;
+    margin-top: var(--hud-height);
+  }
+
+  /* Station on top — 45% */
+  .game-main > :last-child {
+    order: -1;
+    width: 100%;
+    height: 45vh;
+    flex: none;
+  }
+
+  /* Divider becomes horizontal */
+  .game-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--cyan-border) 20%,
+      var(--cyan-border) 80%,
+      transparent
+    );
+    order: 0;
+  }
+
+  /* Editor on bottom — 55% */
+  .game-main > :first-child {
+    order: 1;
+    width: 100%;
+    height: 55vh;
+    flex: none;
+  }
+}

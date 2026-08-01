@@ -1,0 +1,129 @@
+.hud {
+  position: fixed;
+  top: 2px; /* below progress rail */
+  left: 0;
+  right: 0;
+  height: var(--hud-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-6);
+  gap: var(--sp-4);
+  z-index: 50;
+  border-radius: 0;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid var(--cyan-border);
+}
+
+/* Left */
+.hud-left {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  min-width: 0;
+}
+
+.hud-level-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.hud-level-num {
+  font-family: var(--font-code);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--cyan);
+  text-transform: uppercase;
+}
+
+.hud-level-title {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--on-surface);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+/* Center Dots */
+.hud-dots {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-shrink: 0;
+}
+
+.hud-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--surface-top);
+  border: 1px solid var(--outline);
+  cursor: pointer;
+  transition: all var(--transition);
+  padding: 0;
+}
+
+.hud-dot:hover {
+  background: var(--surface-hi);
+  border-color: var(--cyan-dim);
+  transform: scale(1.3);
+}
+
+.hud-dot.done {
+  background: var(--green-dim);
+  border-color: var(--green);
+  box-shadow: 0 0 6px var(--green-glow);
+}
+
+.hud-dot.active {
+  background: var(--cyan);
+  border-color: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan-glow);
+  transform: scale(1.4);
+}
+
+/* Right */
+.hud-right {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  flex-shrink: 0;
+}
+
+.hud-score {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  font-family: var(--font-code);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--cyan);
+}
+
+.score-icon { font-size: 16px; }
+
+.hud-streak {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-family: var(--font-code);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--error);
+}
+
+.streak-fire { font-size: 16px; }
+.streak-num  { color: var(--on-surface); }
+
+/* Mobile: hide dots and title */
+@media (max-width: 640px) {
+  .hud-dots { display: none; }
+  .hud-level-title { max-width: 120px; font-size: 12px; }
+  .hud { padding: 0 var(--sp-4); gap: var(--sp-2); }
+}

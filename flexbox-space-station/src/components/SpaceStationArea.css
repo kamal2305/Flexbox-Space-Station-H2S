@@ -1,0 +1,194 @@
+.station-area {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+  overflow-y: auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Instructions */
+.instructions-panel {
+  padding: var(--sp-4) var(--sp-5);
+  flex-shrink: 0;
+}
+
+.instructions-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--on-surface);
+  line-height: 1.6;
+}
+
+.instructions-text strong {
+  color: var(--cyan);
+  font-family: var(--font-code);
+}
+
+.hint-text {
+  margin-top: var(--sp-2);
+  font-family: var(--font-code);
+  font-size: 12px;
+  color: var(--on-surface-muted);
+  font-style: italic;
+}
+
+/* Docking Bay Wrapper */
+.docking-bay-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--cyan-border);
+  border-radius: var(--radius-lg);
+  background: var(--cyan-glass);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  min-height: 200px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.docking-bay-wrapper.correct {
+  border-color: var(--green);
+  box-shadow: 0 0 30px var(--green-glow), inset 0 0 30px rgba(0, 252, 134, 0.05);
+  animation: success-flash 0.8s ease;
+}
+
+.bay-label {
+  padding: var(--sp-2) var(--sp-4);
+  font-family: var(--font-code);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--cyan-dim);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--cyan-border);
+  background: rgba(0, 243, 255, 0.03);
+  flex-shrink: 0;
+}
+
+/* The actual live Flex/Grid container */
+.docking-bay {
+  flex: 1;
+  padding: var(--sp-6);
+  min-height: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.docking-bay.docked .ship {
+  animation: float 2s ease-in-out infinite;
+}
+
+/* Ship */
+.ship {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  animation: float 3s ease-in-out infinite;
+}
+
+.ship-emoji {
+  font-size: 32px;
+  filter: drop-shadow(0 0 8px var(--cyan-glow));
+  z-index: 1;
+  position: relative;
+}
+
+.ship-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--cyan-glass) 0%, transparent 70%);
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Target preview */
+.target-hint {
+  position: absolute;
+  bottom: var(--sp-3);
+  right: var(--sp-3);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--sp-1);
+  pointer-events: none;
+}
+
+.target-label {
+  font-family: var(--font-code);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--purple);
+  text-transform: uppercase;
+}
+
+.target-preview {
+  padding: var(--sp-2);
+  border: 1px dashed var(--purple-dim);
+  border-radius: var(--radius);
+  background: var(--purple-glass);
+  min-width: 80px;
+  min-height: 40px;
+  opacity: 0.7;
+}
+
+.ship-ghost {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.ship-ghost-emoji {
+  font-size: 16px;
+  opacity: 0.5;
+  filter: grayscale(60%);
+}
+
+/* Success overlay */
+.success-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  background: rgba(0, 252, 134, 0.06);
+  pointer-events: none;
+  animation: fadeInUp 0.4s ease;
+}
+
+.success-icon {
+  font-size: 48px;
+  color: var(--green);
+  text-shadow: 0 0 20px var(--green-glow);
+  font-family: var(--font-headline);
+  font-weight: 700;
+}
+
+.success-text {
+  font-family: var(--font-code);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--green);
+  text-shadow: 0 0 10px var(--green-glow);
+}
+
+@media (max-width: 768px) {
+  .station-area { padding: var(--sp-3); gap: var(--sp-3); }
+  .docking-bay { padding: var(--sp-4); }
+  .ship { width: 44px; height: 44px; }
+  .ship-emoji { font-size: 24px; }
+}
