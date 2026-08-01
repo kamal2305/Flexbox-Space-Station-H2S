@@ -2,7 +2,7 @@ import React from "react";
 import { useGame } from "../context/GameContext";
 import "./HeaderHUD.css";
 
-export default function HeaderHUD() {
+export default function HeaderHUD({ onExit }) {
   const {
     currentLevel,
     currentLevelIndex,
@@ -12,6 +12,7 @@ export default function HeaderHUD() {
     streak,
     resetLevel,
     goToLevel,
+    nextLevel,
   } = useGame();
 
   const progressPct = (completedLevels.length / levelsData.length) * 100;
