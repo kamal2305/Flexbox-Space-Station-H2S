@@ -1,15 +1,5 @@
+import { levels } from '../data/levels';
 import './LandingPage.css';
-
-const levels = [
-  { id: 1, title: "The First Docking",  concept: "Flexbox", tag: "justify-content",        ships: ["🚀"],                           points: 100 },
-  { id: 2, title: "Final Approach",     concept: "Flexbox", tag: "justify-content",        ships: ["🚀","🛸"],                      points: 150 },
-  { id: 3, title: "Vertical Alignment", concept: "Flexbox", tag: "align-items",            ships: ["🚀"],                           points: 150 },
-  { id: 4, title: "Column Formation",   concept: "Flexbox", tag: "flex-direction",         ships: ["🚀","🛸","🛩️"],                points: 200 },
-  { id: 5, title: "Fleet Wrap",         concept: "Flexbox", tag: "flex-wrap",              ships: ["🚀","🛸","🛩️","🚀","🛸"],     points: 200 },
-  { id: 6, title: "Row Alignment",      concept: "Flexbox", tag: "align-content",          ships: ["🚀","🛸","🛩️","🚀","🛸","🛩️"], points: 250 },
-  { id: 7, title: "Grid Sectors",       concept: "Grid",    tag: "grid-template-columns",  ships: ["🚀","🛸","🛩️","🚀","🛸","🛩️"], points: 300 },
-  { id: 8, title: "Orbital Grid",       concept: "Grid",    tag: "grid-template-rows+gap", ships: ["🚀","🛸","🛩️","🚀","🛸","🛩️"], points: 400 },
-];
 
 const features = [
   {
@@ -75,7 +65,7 @@ export default function LandingPage({ onStart }) {
 
         <p className="hero-subtitle">
           An interactive space game that teaches Flexbox and CSS Grid through
-          8 progressively challenging docking missions. No setup. Just play.
+          {` ${levels.length} `}progressively challenging docking missions. No setup. Just play.
         </p>
 
         <div className="hero-cta-group">
@@ -94,18 +84,22 @@ export default function LandingPage({ onStart }) {
 
         <div className="hero-stats">
           <div className="hero-stat">
-            <span className="hero-stat-value">8</span>
+            <span className="hero-stat-value">{levels.length}</span>
             <span className="hero-stat-label">Missions</span>
           </div>
           <div className="hero-stat-divider" />
           <div className="hero-stat">
-            <span className="hero-stat-value">1,750</span>
+            <span className="hero-stat-value">
+              {levels.reduce((sum, l) => sum + l.points, 0).toLocaleString()}
+            </span>
             <span className="hero-stat-label">Max Points</span>
           </div>
           <div className="hero-stat-divider" />
           <div className="hero-stat">
-            <span className="hero-stat-value">6</span>
-            <span className="hero-stat-label">CSS Concepts</span>
+            <span className="hero-stat-value">
+              {new Set(levels.map(l => l.concept)).size}
+            </span>
+            <span className="hero-stat-label">Concepts</span>
           </div>
           <div className="hero-stat-divider" />
           <div className="hero-stat">
@@ -190,29 +184,33 @@ export default function LandingPage({ onStart }) {
         <div className="levels-header">
           <div>
             <p className="section-eyebrow">// Mission Briefing</p>
-            <h2 className="section-title">8 Missions.<br />2 Skill Trees.</h2>
+            <h2 className="section-title">{levels.length} Missions.<br />{new Set(levels.map(l => l.concept)).size} Skill Trees.</h2>
             <p className="section-subtitle">
-              Start with Flexbox fundamentals and graduate to CSS Grid mastery.
-              Each mission builds on the last.
+              Start with Flexbox fundamentals, master sizing, placement alignment, and graduate to advanced CSS Grid challenges.
             </p>
           </div>
         </div>
 
         <div className="levels-grid">
-          {levels.map((level) => (
+          {levels.slice(0, 8).map((level) => (
             <div
               key={level.id}
-              className={`level-card${level.concept === 'Grid' ? ' grid-level' : ''}`}
+              className={`level-card${level.concept.includes('Grid') ? ' grid-level' : ''}`}
             >
               <div className="level-number">MISSION {String(level.id).padStart(2, '0')}</div>
-              <div className="level-ships">{level.ships.slice(0, 3).join('')}</div>
+              <div className="level-ships">{level.ships.slice(0, 3).map(s => s.label).join('') || "🛸"}</div>
               <div className="level-title">{level.title}</div>
-              <span className={`level-tag${level.concept === 'Grid' ? ' grid-tag' : ''}`}>
+              <span className={`level-tag${level.concept.includes('Grid') ? ' grid-tag' : ''}`}>
                 {level.tag}
               </span>
               <span className="level-points">+{level.points}pts</span>
             </div>
           ))}
+        </div>
+        <div style={{ textAlign: 'center', marginTop: '40px' }}>
+          <button className="btn-primary" onClick={onStart}>
+            <span>And {levels.length - 8} more missions... Play now</span>
+          </button>
         </div>
       </section>
 
