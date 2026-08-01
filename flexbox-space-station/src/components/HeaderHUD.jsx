@@ -16,14 +16,30 @@ export default function HeaderHUD() {
 
   const progressPct = (completedLevels.length / levelsData.length) * 100;
 
+  const isLastLevel = currentLevelIndex === levelsData.length - 1;
+
+  const handleSkip = () => {
+    if (!isLastLevel) {
+      nextLevel();
+    } else {
+      // Loop back to level 1 or simply show first level
+      goToLevel(0);
+    }
+  };
+
   return (
     <>
       {/* Progress Rail */}
       <div className="progress-rail" style={{ width: `${progressPct}%` }} />
 
       <header className="hud glass">
-        {/* Left: Level info */}
+        {/* Left: Level info & Home button */}
         <div className="hud-left">
+          {onExit && (
+            <button className="btn-ghost btn-home" onClick={onExit} aria-label="Go to homepage">
+              🏠 Home
+            </button>
+          )}
           <span className={`concept-chip ${currentLevel.concept === "Grid" ? "grid" : ""}`}>
             {currentLevel.concept}
           </span>
@@ -48,7 +64,7 @@ export default function HeaderHUD() {
           ))}
         </nav>
 
-        {/* Right: Score + streak + reset */}
+        {/* Right: Score + streak + actions */}
         <div className="hud-right">
           {streak > 0 && (
             <div className="hud-streak" title="Current streak">
@@ -62,6 +78,9 @@ export default function HeaderHUD() {
           </div>
           <button className="btn-ghost" onClick={resetLevel} aria-label="Reset current level">
             ↺ Reset
+          </button>
+          <button className="btn-ghost btn-skip" onClick={handleSkip} aria-label="Skip level">
+            ⏭️ Skip
           </button>
         </div>
       </header>

@@ -127,3 +127,22 @@
   .hud-level-title { max-width: 120px; font-size: 12px; }
   .hud { padding: 0 var(--sp-4); gap: var(--sp-2); }
 }
+
+.btn-home {
+  border-color: var(--cyan-border);
+  color: var(--cyan);
+}
+.btn-home:hover {
+  background: var(--cyan-glass);
+  border-color: var(--cyan);
+}
+
+.btn-skip {
+  border-color: var(--purple-glow);
+  color: var(--on-surface-muted);
+}
+.btn-skip:hover {
+  border-color: var(--purple);
+  color: var(--on-surface);
+  background: var(--purple-glass);
+}

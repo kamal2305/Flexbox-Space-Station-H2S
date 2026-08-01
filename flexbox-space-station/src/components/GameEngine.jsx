@@ -5,10 +5,10 @@ import CodeEditorPanel from "./CodeEditorPanel";
 import LevelCompleteModal from "./LevelCompleteModal";
 import "./GameEngine.css";
 
-export default function GameEngine() {
+export default function GameEngine({ onExit }) {
   return (
     <div className="game-root">
-      <HeaderHUD />
+      <HeaderHUD onExit={onExit} />
 
       <main className="game-main">
         {/* Left: Code Editor (40%) */}

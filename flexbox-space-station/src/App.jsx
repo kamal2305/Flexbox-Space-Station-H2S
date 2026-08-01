@@ -13,7 +13,7 @@ export default function App() {
 
   return (
     <GameProvider>
-      <GameEngine />
+      <GameEngine onExit={() => setShowGame(false)} />
     </GameProvider>
   );
 }
