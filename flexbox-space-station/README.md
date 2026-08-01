@@ -71,4 +71,4 @@ Follow these steps to run the game locally on your device:
    npm install -g vercel
    vercel --prod
    ```
-3. Set the **Root Directory** settings to `flexbox-space-station` on the Vercel dashboard to enable seamless automatic deployments for every push on GitHub.
+3. Set the **Root Directory** settings to `flexbox-space-station` on the Vercel dashboard to enable seamless automatic deployments for every push on gitHub.
